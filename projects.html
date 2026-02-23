@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشاريعي - عمر يسري</title>
+    
+    <!-- استدعاء خط عربي -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #00e5ff;
+            --secondary-color: #ffeb3b;
+            --bg-dark: #0f2027;
+            --bg-light: #203a43;
+            --text-color: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-light), #2c5364);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* العنوان الرئيسي */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+        }
+
+        header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        header p {
+            margin-top: 25px;
+            color: #aaa;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        /* الحاوية الرئيسية */
+        .projects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        /* بطاقة المشروع */
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            width: 350px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        /* صورة المشروع */
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, var(--bg-dark), var(--bg-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image i {
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.5;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover .project-image i {
+            opacity: 1;
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        /* overlay عند التمرير */
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 229, 255, 0.3), transparent);
+            opacity: 0;
+            transition: 0.4s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        /* محتوى المشروع */
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-category {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.15);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .project-card:hover .project-title {
+            color: var(--primary-color);
+        }
+
+        .project-description {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* تقنيات المشروع */
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            color: #ddd;
+        }
+
+        /* أزرار المشروع */
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-btn {
+            flex: 1;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+        }
+
+        /* رابط العودة */
+        .back-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: fit-content;
+            margin: 50px auto 30px;
+            padding: 15px 40px;
+            text-decoration: none;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .back-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--primary-color);
+            transition: 0.4s ease;
+            z-index: -1;
+        }
+
+        .back-link:hover {
+            color: var(--bg-dark);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 229, 255, 0.3);
+        }
+
+        .back-link:hover::before {
+            width: 100%;
+        }
+
+        /* تأثيرات متحركة */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* تأخير ظهور البطاقات */
+        .project-card:nth-child(1) { animation-delay: 0.3s; }
+        .project-card:nth-child(2) { animation-delay: 0.4s; }
+        .project-card:nth-child(3) { animation-delay: 0.5s; }
+        .project-card:nth-child(4) { animation-delay: 0.6s; }
+        .project-card:nth-child(5) { animation-delay: 0.7s; }
+        .project-card:nth-child(6) { animation-delay: 0.8s; }
+
+        /* تصميم متجاوب للجوال */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .projects-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .project-card {
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .project-image {
+                height: 180px;
+            }
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #666;
+            font-size: 0.9rem;
+            padding: 20px;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>مشاريعي</h1>
+        <p>مجموعة من المشاريع التي قمت بتنفيذها في البرمجة والهندسة</p>
+    </header>
+
+    <div class="projects-container">
+        
+        <!-- المشروع الأول -->
+        <div class="project-card">
+            <div class="project-image">
+                <i class="fas fa-globe"></i>
+                <div class="project-overlay"></div>
+            </div>
+            <div class="project-content">
+                <span class="project-category">تطوير ويب</span>
+                <h3 class="project-title">موقع شخصي</h3>
+                <p class="project-description">
+                    موقع سيرة ذاتية احترافي يعرض مهاراتي ومشاريعي ومعلومات التواصل بشكل عصري وجذاب.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-btn btn-primary">
+                        <i class="fab fa-github"></i> الكود
+                    </a>
+                    <a href="#" class="project-btn btn-secondary">
+                        <i class="fas fa-external-link-alt"></i> معاينة
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- المشروع الثاني -->
+        <div class="project-card">
+            <div class="project-image">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="project-overlay"></div>
+            </div>
+            <div class="project-content">
+                <span class="project-category">تطوير ويب</span>
+                <h3 class="project-title">متجر إلكتروني</h3>
+                <p class="project-description">
+                    متجر لبيع المنتجات مع نظام سلة تسوق وإدارة المنتجات والدفع الإلكتروني.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-btn btn-primary">
+                        <i class="fab fa-github"></i> الكود
+                    </a>
+                    <a href="#" class="project-btn btn-secondary">
+                        <i class="fas fa-external-link-alt"></i> معاينة
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- المشروع الثالث -->
+        <div class="project-card">
+            <div class="project-image">
+                <i class="fas fa-robot"></i>
+                <div class="project-overlay"></div>
+            </div>
+            <div class="project-content">
+                <span class="project-category">هندسة Mechatronics</span>
+                <h3 class="project-title">روبوت ذكي</h3>
+                <p class="project-description">
+                    روبوت متتبع للخطوط يستخدم المتحكمات الدقيقة للتنقل الذاتي مع مستشعرات تجنب العوائق.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Arduino</span>
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Sensors</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-btn btn-primary">
+                        <i class="fab fa-github"></i> الكود
+                    </a>
+                    <a href="#" class="project-btn btn-secondary">
+                        <i class="fas fa-video"></i> فيديو
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- المشروع الرابع -->
+        <div class="project-card">
+            <div class="project-image">
+                <i class="fas fa-mobile-alt"></i>
+                <div class="project-overlay"></div>
+            </div>
+            <div class="project-content">
+                <span class="project-category">تطوير ويب</span>
+                <h3 class="project-title">تطبيق مهام</h3>
+                <p class="project-description">
+                    تطبيق لإدارة المهام اليومية مع إمكانية تحديد الأولويات والمواعيد النهائية.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">LocalStorage</span>
+                    <span class="tech-tag">CSS3</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-btn btn-primary">
+                        <i class="fab fa-github"></i> الكود
+                    </a>
+                    <a href="#" class="project-btn btn-secondary">
+                        <i class="fas fa-external-link-alt"></i> معاينة
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- المشروع الخامس -->
+        <div class="project-card">
+            <div class="project-image">
+                <i class="fas fa-car"></i>
+                <div class="project-overlay"></div>
+            </div>
+            <div class="project-content">
+                <span class="project-category">هندسة Mechatronics</span>
+                <h3 class="project-title">نظام مساعدة السائق</h3>
+                <p class="project-description">
+                    نظام مساعدة للسائق يتضمن رصد المسافة وإشعارات التصادم وإيقاف تلقائي.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Arduino</span>
+                    <span class="tech-tag">Ultrasonic</span>
+                    <span class="tech-tag">LCD</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-btn btn-primary">
+                        <i class="fab fa-github"></i> الكود
+                    </a>
+                    <a href="#" class="project-btn btn-secondary">
+                        <i class="fas fa-video"></i> فيديو
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- المشروع السادس -->
+        <div class="project-card">
+            <div class="project-image">
+                <i class="fas fa-envelope-open-text"></i>
+                <div class="project-overlay"></div>
+            </div>
+            <div class="project-content">
+                <span class="project-category">تطوير ويب</span>
+                <h3 class="project-title">نظام تواصل</h3>
+                <p class="project-description">
+                    نموذج اتصال احترافي مع إرسال تلقائي للبريد الإلكتروني وإشعار نجاح الإرسال.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-btn btn-primary">
+                        <i class="fab fa-github"></i> الكود
+                    </a>
+                    <a href="contact.html" class="project-btn btn-secondary">
+                        <i class="fas fa-external-link-alt"></i> جربه
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- رابط العودة -->
+    <a href="index.html" class="back-link">
+        <i class="fas fa-home"></i>
+        العودة للرئيسية
+    </a>
+
+    <footer>
+        © 2024 جميع الحقوق محفوظة - عمر يسري
+    </footer>
+
+</body>
+</html>

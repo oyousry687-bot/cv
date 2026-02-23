@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السيرة الذاتية - عمر يسري</title>
+    
+    <!-- استدعاء خط عربي جميل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #00e5ff;
+            --secondary-color: #ffeb3b;
+            --bg-dark: #0f2027;
+            --bg-light: #203a43;
+            --text-color: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-light), #2c5364);
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* العنوان الرئيسي */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+        }
+
+        header h1::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        header p {
+            color: #aaa;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        /* البطاقات */
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-color);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 35px 45px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            width: 200px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card i {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+        }
+
+        .card:hover i {
+            transform: scale(1.2) rotate(5deg);
+            color: var(--secondary-color);
+        }
+
+        .card span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .card:hover span {
+            color: var(--primary-color);
+        }
+
+        /* تأثيرات متحركة */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* تأخير ظهور كل بطاقة */
+        .card:nth-child(1) { animation-delay: 0.4s; }
+        .card:nth-child(2) { animation-delay: 0.5s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+        .card:nth-child(4) { animation-delay: 0.7s; }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .container {
+                gap: 20px;
+            }
+
+            .card {
+                width: 150px;
+                padding: 25px;
+            }
+
+            .card i {
+                font-size: 2.5rem;
+            }
+
+            .card span {
+                font-size: 1rem;
+            }
+        }
+
+        /* الفوتر */
+        footer {
+            position: absolute;
+            bottom: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>عمر يسري</h1>
+        <p>مطور ويب</p>
+    </header>
+
+    <div class="container">
+        <a href="about.html" class="card">
+            <i class="fas fa-user"></i>
+            <span>عني</span>
+        </a>
+
+        <a href="skills.html" class="card">
+            <i class="fas fa-code"></i>
+            <span>المهارات</span>
+        </a>
+
+        <a href="projects.html" class="card">
+            <i class="fas fa-folder-open"></i>
+            <span>المشاريع</span>
+        </a>
+
+        <a href="contact.html" class="card">
+            <i class="fas fa-envelope"></i>
+            <span>التواصل</span>
+        </a>
+    </div>
+
+    <footer>
+        © 2024 جميع الحقوق محفوظة - عمر يسري
+    </footer>
+
+</body>
+</html>
